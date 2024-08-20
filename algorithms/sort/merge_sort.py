@@ -1,11 +1,18 @@
+"""
+keyword: merge sort, merge_sort, mergesort, sorting, divide, conquer, combine
+
+keypoints: 비슷한 크기의 두 부분으로 나눠 다시 합병하는 과정에서 정렬되는 방법
+
+"""
+
 # 두 개의 서브 배열을 병합하는 함수
 def merge(arr, l, m, r):
     n1 = m - l + 1 # 왼쪽 서브 배열 크기
     n2 = r - m     # 오른쪽 서브 배열 크기
 
-    # 임시 배열 생성
-    L = arr[l:l + n1]
-    R = arr[m + 1:m + 1 + n2]
+    # 임시 배열 생성 / 또는 sorted를 저장할 추가적인 공간 생성
+    L = arr[l : l + n1]
+    R = arr[m + 1 : m + 1 + n2]
 
     i = 0
     j = 0

@@ -1,3 +1,9 @@
+"""
+keyword: selection sort, selection_sort, selectionsort, sorting
+
+keypoints: 현재 위치에 최솟값을 찾아 선택해 넣는 정렬
+
+"""
 # Selection Sort 알고리즘
 def selectionSort(arr):
     n = len(arr)
