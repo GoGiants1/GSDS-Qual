@@ -11,7 +11,7 @@ INF = int(10**9)
 * dijkstra가 음수 weight에 대해 안되는 이유 https://stackoverflow.com/questions/13159337/why-doesnt-dijkstras-algorithm-work-for-negative-weight-edges
 3) a general weightd graph -> bellman-ford
 주의할 점 : positive/negative weight cycle은 한번 돌때마다 cycle 안의 dist 값이 바뀜
-            따라서 sssp는 zero-weight cycle 있을때만 정의됨
+            따라서 sssp는 안에 cycle이 없거나 zero-weight cycle만 있을때 정의됨
 '''
 
 def sssp_bfs(graph, start, distances):
