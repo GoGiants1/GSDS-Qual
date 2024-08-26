@@ -1,40 +1,39 @@
-# 특정 원소가 속한 집합을 찾기
-def find(x):
-    # 루트 노드가 아니라면, 루트 노드를 찾을 때까지 재귀적으로 호출
-    if parent[x] != x:
-        return find(parent[x])
-    return x
+class UnionFind:
+    def __init__(self, size):
+        self.parent = list(range(size))  # Initialize each node to be its own parent
+        self.rank = [0] * size  # Rank (depth) of each tree is initially 0
 
-# 두 원소가 속한 집합을 합치기
-def union(a, b):
-    a = find(a)
-    b = find(b)
-    if a < b:
-        parent[b] = a
-    else:
-        parent[a] = b
+    def find(self, p):
+        # Path compression: make the found root the parent of all nodes in the path
+        if self.parent[p] != p:
+            self.parent[p] = self.find(self.parent[p])  # Recursively find the root
+        return self.parent[p]
 
-# 노드의 개수와 간선(Union 연산)의 개수 입력 받기
-v, e = map(int, input().split())
-parent = [0] * (v + 1) # 부모 테이블 초기화하기
+    def union(self, p, q):
+        rootP = self.find(p)
+        rootQ = self.find(q)
 
-# 부모 테이블상에서, 부모를 자기 자신으로 초기화
-for i in range(1, v + 1):
-    parent[i] = i
+        if rootP != rootQ:
+            # Union by rank: attach smaller tree under root of deeper tree
+            if self.rank[rootP] > self.rank[rootQ]:
+                self.parent[rootQ] = rootP
+            elif self.rank[rootP] < self.rank[rootQ]:
+                self.parent[rootP] = rootQ
+            else:
+                self.parent[rootQ] = rootP
+                self.rank[rootP] += 1
 
-# Union 연산을 각각 수행
-for i in range(e):
-    a, b = map(int, input().split())
-    union(a, b)
+    def connected(self, p, q):
+        return self.find(p) == self.find(q)
 
-# 각 원소가 속한 집합 출력하기
-print('각 원소가 속한 집합: ', end='')
-for i in range(1, v + 1):
-    print(find(i), end=' ')
+# Example usage:
+uf = UnionFind(10)
 
-print()
+# Union some sets
+uf.union(1, 2)
+uf.union(3, 4)
+uf.union(1, 4)
 
-# 부모 테이블 내용 출력하기
-print('부모 테이블: ', end='')
-for i in range(1, v + 1):
-    print(parent[i], end=' ')
+# Check if they are connected
+print(uf.connected(1, 4))  # True
+print(uf.connected(1, 5))  # False
