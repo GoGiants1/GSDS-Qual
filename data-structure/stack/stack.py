@@ -1,3 +1,8 @@
+"""
+- keyword: stack
+- functions: push, pop, peek, is_empty
+"""
+
 class Node:
     def __init__(self, data):
         self.data = data

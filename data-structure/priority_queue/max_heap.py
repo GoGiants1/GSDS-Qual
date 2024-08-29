@@ -1,6 +1,6 @@
 class Node:
-    def __init__(self, val):
-        self.val = val
+    def __init__(self, x):
+        self.val = x
         self.left = None
         self.right = None
         self.parent = None
@@ -58,9 +58,10 @@ class MaxHeap:
     def dequeue(self):
         if not self.root:
             return
-        if not self.root.left and not self.root.right:
+        if self.heapsize == 1:
             self.root = None
         else:
+            # Find the last node
             path = self.heapsize
             current = self.root
             for shift in range((path.bit_length() - 2), 0, -1):
@@ -68,6 +69,8 @@ class MaxHeap:
                     current = current.right
                 else:
                     current = current.left
+
+            # Replace root value with last node value and remove the last node
             if path & 1:
                 last_node = current.right
                 current.right = None
@@ -107,3 +110,4 @@ max_heap.print_heap()
 max_heap.dequeue()
 print("MaxHeap after dequeue:")
 max_heap.print_heap()
+

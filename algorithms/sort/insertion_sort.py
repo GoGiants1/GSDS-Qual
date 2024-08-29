@@ -1,25 +1,24 @@
 """
-keyword: insertion sort, insertion_sort, insertionsort, sorting
+- keyword: insertion sort, insertion_sort
 
-keypoints: 자신의 위치를 찾아 삽입하는 방법
-
+- keypoints: 
+    * 정렬되지 않은 부분의 각 요소를 차례대로 이미 정렬된 부분의 적절한 위치에 삽입 (거의 정렬된 배열 정렬할 떄 효율적)
+    * O(n) / O(n^2)
+    * In-place sorting
+    * 안정적 (동일 원소 순서 유지)
 """
 
 def insertion_sort(arr):
-    # 배열의 첫 번째 요소는 이미 정렬된 상태로 간주하고, 두 번째 요소부터 시작
-    for i in range(1, len(arr)):
-        key = arr[i]  # 현재 삽입할 요소
-        j = i - 1
+	for i in range(1,len(arr)):     # unsorted 시작 부분
+		key = arr[i]
+		j = i-1                       # sorted 시작 부분 (역순으로 비교)
+		while j>=0 and key < arr[j]:
+			arr[j+1] = arr[j]           # key가 아직 더 크다면 j를 뒤로 한 칸씩 밂
+			j-=1
+		arr[j+1] = key                # 현재 j는 key보다 작은 index를 가리키고 있을 것. 따라서 key는 그 다음 index에 넣어야 하니 j+1
 
-        # 현재 요소(key)보다 큰 요소들은 한 칸씩 뒤로 이동
-        while j >= 0 and arr[j] > key:
-            arr[j + 1] = arr[j]
-            j -= 1
-        
-        # 현재 요소(key)를 올바른 위치에 삽입
-        arr[j + 1] = key
 
-# 테스트 코드
-arr = [12, 11, 13, 5, 6]
-insertion_sort(arr)
-print("Sorted array is:", arr)
+if __name__ == "__main__":
+    arr = [64, 34, 25, 12, 22, 11, 90]
+    insertion_sort(arr)
+    print("Sorted array is:", arr)

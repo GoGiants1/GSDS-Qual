@@ -1,7 +1,13 @@
+"""
+- keyword: linkedlist
+- functions: appendleft, append, popleft, pop, remove, insert, reverse
+"""
+
+
 class Node():
-    def __init__(self, _data, _next = None):
-        self.data = _data
-        self.next = _next
+    def __init__(self, data):
+        self.data = data
+        self.next = None
 
 
 class LinkedList:
@@ -11,12 +17,37 @@ class LinkedList:
 
     def __len__(self):
         return self.length
+    
+    def __str__(self):
+        """
+        요소 출력
+        """
+        res = "Head"
+        if self.head is None:
+            return f"{res} → None"
+        node = self.head
+        while node is not None:
+            res = f"{res} → {str(node.data)}"
+            node = node.next
+        return res
+    
+    def __contains__(self, target):
+        if self.head is None:
+            return False
+        node = self.head
+        while node is not None:
+            if node.data == target:
+                return True
+            node = node.next
+        return False
 
     def appendleft(self, data):
         if self.head is None:
             self.head = Node(data)
         else:
-            self.head = Node(data, self.head)
+            node = Node(data)
+            node.next = self.head
+            self.head = node
         self.length += 1
 
     def append(self, data):
@@ -29,30 +60,10 @@ class LinkedList:
             node.next = Node(data)
         self.length += 1
 
-    def __str__(self):
-        res = "Head"
-        if self.head is None:
-            return f"{res} → None"
-        node = self.head
-        while node is not None:
-            res = f"{res} → {str(node.data)}"
-            node = node.next
-        return res
-
-    def __contains__(self, target):
-        if self.head is None:
-            return False
-        node = self.head
-        while node is not None:
-            if node.data == target:
-                return True
-            node = node.next
-        return False
-
     def popleft(self):
         if self.head is None:
             return None
-        node = self.head
+        node = self.head     # 값 출력을 위해 잠깐 저장
         self.head = self.head.next
         self.length -= 1
         return node.data
@@ -60,15 +71,14 @@ class LinkedList:
     def pop(self):
         if self.head is None:
             return None
-        prev = None
         node = self.head
         while node.next is not None:
             prev = node
             node = node.next
-        if prev is None:
+        if node == self.head:
             self.head = None
         else:
-            prev.next = None
+            prev.next = None    # 현재를 지움
         self.length -= 1
         return node.data
 
@@ -93,23 +103,28 @@ class LinkedList:
             self.append(data)
         else:
             node = self.head
-            for _ in range(idx - 1):
+            for _ in range(idx - 1):          # i번째 자리에 넣고 싶으면 i-1번 가야함
                 node = node.next
-            new_node = Node(data, node.next)
+            new_node = Node(data)
+            new_node.next = node.next
             node.next = new_node
             self.length += 1
 
     def reverse(self):
+        """
+        linked list 뒤집기
+        """
         if self.length < 2:
             return
         prev = None
         ahead = self.head.next
-        while ahead:
+        while ahead:        # ahead가 None이면 head가 마지막 노드로 이동한 상태
             self.head.next = prev
             prev = self.head
             self.head = ahead
             ahead = ahead.next
-        self.head.next = prev
+        self.head.next = prev     # 뒤집기 전 마지막 노드와 이전 노드 연결
+
 
 
 if __name__ == "__main__":
