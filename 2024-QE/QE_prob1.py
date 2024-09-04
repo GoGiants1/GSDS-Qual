@@ -1,3 +1,41 @@
+
+'''
+implement a python program that checks various properties of a given binary tree.
+A binary tree is a tree data structure in which each node has at most two children nodes.
+Use the following node definition in your code. you can add additional members in the TNode definition.
+you do not have to assume invalid calls. (None is not given as an argument)
+
+given:
+    class TNode:
+        def __init__(self, val=0, left=None, right=None):
+            self.val = val
+            self.left = left
+            self.right = right
+
+implement:
+    def height(T: TNode) -> int:
+        # takes a root node of a binary tree as input and returns the height of the binary tree.
+        # if only have root -> height is 0
+        
+
+    def is_balanced(T: TNode) -> bool:
+        # takes a root node of a binary tree as input and returns True if the tree is balanced or False otherwise.
+        # A binary tree is balanced if the difference in heights between the left and right subtrees of each node is at most 1.
+
+    def is_bst(T: TNode) -> bool:
+        # takes a root node of a binary tree as input and returns True if a binary tree satisfies the BST property
+
+    def common_ancestors(T: TNode, U: TNode, V: TNode) -> list[int]:
+        # takes a root node and two nodes of a binary tree as input and returns the value of all the common ancestors
+        # oneself is one of the ancestors
+
+    def lca(T: TNode, U: TNode, V: TNode) -> int:
+        # takes a root node and two nodes of a binary tree as input and returns the lowest one among all the common ancestors
+        # lowest one is the one that farthest from the root
+        
+'''
+
+
 from collections import deque
 
 
