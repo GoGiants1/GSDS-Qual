@@ -1,3 +1,42 @@
+
+/*
+  you must write C functions that implement a list of stacks and its interfaces.
+  A list of stacks should be composed of multiple stacks that store positive integer values and create a new stack once the previous one exceeds capacity.
+  A new stack is added to the end of the list.
+  The list of stacks provides two operations, push and pop, and they should behave identically to a single stack. In other words, pop must return the same values as if there were just a single stack.
+  Use the following list node data structure in your code.
+  You can freely implement the struct Stack data structure as long as it behaves as a stack.
+  stack capacity determines the maximum size of the stack. we assume the same capacity for all stacks in the list.
+
+  you can only include <stdio.h> and <stdlib.h>
+
+  given:
+    typedef struct ListNode {
+      struct ListNode *next;
+      struct Stack *stack;
+      int stack_capacity;
+    } ListNode;
+
+  implement:
+
+    typedef struct Stack {
+      //
+    } Stack;
+
+    int list_size(ListNode *head) {}
+        // returns the number of non-empty stacks in the list
+
+    void push_los(ListNode *head, int val) {}
+        // takes a head node of the list and pushes the value into the data structure
+
+    int pop_los(ListNode *head) {}
+        // takes a head node of the list and pops a value as if it were a single stack.
+        // it the list is empty and no value can be popped, the function must return -9999 to indicate an error status
+
+
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
